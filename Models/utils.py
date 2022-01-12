@@ -61,6 +61,7 @@ class ConvBNReLU(nn.Module):
         return x
 
 
+#conv(x) + residual_conv(x) 리턴
 class ResidualConvBlock(nn.Module):
     def __init__(self, nIn, nOut, ksize=3, stride=1, pad=1, dilation=1, groups=1,
             bias=True, use_relu=True, use_bn=True, frozen=False):
