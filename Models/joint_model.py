@@ -6,7 +6,7 @@ from Models.vgg import vgg16
 from Models.resnet import resnet18, resnet50, resnet101
 from Models.res2net import res2net50_v1b, res2net101_v1b
 
-#FCN 역할
+#sigmoid함수에 saliency_maps을 넣은 결과값 return
 class FCN(nn.Module):
     def __init__(self, pretrained=None):
         super(FCN, self).__init__()
