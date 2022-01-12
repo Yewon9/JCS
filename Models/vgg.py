@@ -32,7 +32,7 @@ class VGG16BN(nn.Module):
         if input_features:
             print("vgg backbone input features conv_1_2!!!")
 
-    #conv1_2, conv2_2, conv3_3, conv4_3, conv5_3 return
+    #conv1_2, conv2_2, conv3_3, conv4_3, conv5_3 리턴
     def forward(self, input):
         if not self.input_features:
             conv1_1 = self.conv1_1(input)
@@ -62,7 +62,7 @@ class VGG16BN(nn.Module):
 
         return conv1_2, conv2_2, conv3_3, conv4_3, conv5_3
 
-    #conv1_1(x) 결과값을 conv1_2에 입력한 결과값 return
+    #conv1_1(x) 결과를 conv1_2에 입력한 결과 리턴
     def gen_feats(self, x):
         conv1_1 = self.conv1_1(x)
         conv1_2 = self.conv1_2(conv1_1)
@@ -71,6 +71,7 @@ class VGG16BN(nn.Module):
 
 
 #pretrained가 None이 아닐 경우, '"vgg16 backbone loading:" + pretrained' 출력
+#VGG16BN 결과 리턴
 def vgg16(pretrained=None, input_features=False):
     model = VGG16BN(input_features=input_features)
     if pretrained is not None:
