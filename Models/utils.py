@@ -39,6 +39,11 @@ class ConvBNReLU(nn.Module):
         super(ConvBNReLU, self).__init__()
         self.conv = nn.Conv2d(nIn, nOut, kernel_size=ksize, stride=stride, padding=pad, \
                               dilation=dilation, groups=groups, bias=bias)
+        #use_bn=True, frozen=True이면 FrozenBatchNorm2d 실행
+        #use_bn=True, frozen=False이면 BatchNorm2d 실행
+        #use_bn=False이면 None
+        #use_relu=True이면 nn.ReLU 실행
+        #use_relu=False이면 None
         if use_bn:
             if frozen:
                 self.bn = FrozenBatchNorm2d(nOut)
@@ -51,6 +56,7 @@ class ConvBNReLU(nn.Module):
         else:
             self.act = None
 
+    #bn, act가 None이 아닐 경우 bn(x), act(x) 리턴
     def forward(self, x):
         x = self.conv(x)
         if self.bn is not None:
