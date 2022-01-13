@@ -13,6 +13,9 @@ class FrozenBatchNorm2d(nn.Module):
         self.register_buffer("running_mean", torch.zeros(n))
         self.register_buffer("running_var", torch.ones(n))
 
+    #x * scale + bias 리턴
+    #scale = weight * running_var.rsqrt
+    #bias = bias - running_mean * scale
     def forward(self, x):
         # Cast all fixed parameters to half() if necessary
         if x.dtype == torch.float16:
@@ -27,6 +30,8 @@ class FrozenBatchNorm2d(nn.Module):
         bias = bias.reshape(1, -1, 1, 1)
         return x * scale + bias
 
+    #s 리턴
+    #s = weight의 열의 개수..?
     def __repr__(self):
         s = self.__class__.__name__ + "("
         s += "{})".format(self.weight.shape[0])
